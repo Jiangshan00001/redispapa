@@ -8,6 +8,9 @@ import redis
 from flask import Flask, render_template, session, request, send_from_directory, make_response
 from flask.ext.socketio import SocketIO, emit, join_room, leave_room, disconnect
 from gevent import monkey
+
+from flask_login import login_required
+
 monkey.patch_all()
 from config import *
 
@@ -152,6 +155,7 @@ class RedisInfo(threading.Thread):
 
 
 @app.route('/')
+@login_required
 def index():
     return make_response(open('templates/index.html').read())
 
@@ -203,7 +207,13 @@ for r in REDIS_SERVER:
     r_info.start()
     all_thread.append(r_info)
 
-
+from simple_login import simple_login_blueprint
+import simple_login
 if __name__ == '__main__':
+    simple_login.login_manager.init_app(app)
+    app.register_blueprint(simple_login_blueprint)
+
+
+
     signal.signal(signal.SIGINT, signal_handler)
     socketio.run(app, host='0.0.0.0', port=5000)

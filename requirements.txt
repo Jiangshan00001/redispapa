@@ -1,6 +1,8 @@
-redis>=2.10.3
+redis==2.10.5
 Flask==0.10.1
 Flask-SocketIO==0.3.8
-gevent==1.0.1
+Flask-WTF==0.14.2
+Flask-Login==0.4.0
+gevent==1.2.2
 gevent-socketio==0.3.6
 gevent-websocket==0.9.3
