@@ -1,5 +1,7 @@
 =============
+
 1 update requiremnts.txt index.html for server and client socketio protocol
+
 2 add login form. default username and password=redissimple.
 
 =============
